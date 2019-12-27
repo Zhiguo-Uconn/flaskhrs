@@ -1,9 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request
-from flaskhrs.forms import RegistrationForm, LoginForm
+from flaskhrs.forms import RegistrationForm, LoginForm, PatientForm
 from flaskhrs.models import User, Doctor, Patient
 from flaskhrs import app, bcrypt, db
 from flask_login import login_user, current_user, logout_user, login_required
-
 
 clients = [
     {
@@ -43,6 +42,10 @@ def register():
                     email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
+        if form.role.data == 'D':
+            doc = Doctor(first_name='', last_name='', user_id=user.id)
+            db.session.add(doc)
+            db.session.commit()
         flash(f'Account created for {form.username.data}! You are now able to login.', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
@@ -74,3 +77,15 @@ def logout():
 @login_required
 def account():
     return render_template('account.html', title='Account')
+
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template('dashboard.html', title='HRS Dashboard')
+
+
+@app.route("/newpatient", methods=['GET', 'POST'])
+@login_required
+def new_patient():
+    form = PatientForm()
+    return render_template('newpatient.html', title='Create New Patient', form=form, topic='New Patient')
