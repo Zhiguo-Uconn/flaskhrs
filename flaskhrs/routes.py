@@ -1,29 +1,14 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, session
 from flaskhrs.forms import RegistrationForm, LoginForm, PatientForm
 from flaskhrs.models import User, Doctor, Patient
 from flaskhrs import app, bcrypt, db
 from flask_login import login_user, current_user, logout_user, login_required
 
-clients = [
-    {
-        'doc': 'Wang',
-        'gender': 'male',
-        'race': 'Asian',
-        'bday': '09/28/1975',
-    },
-    {
-        'doc': 'Stephen',
-        'gender': 'male',
-        'race': 'White',
-        'bday': '11/28/1963',
-    }
-]
-
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html', clients=clients)
+    return render_template('home.html', user=current_user)
 
 
 @app.route('/about')
@@ -88,4 +73,23 @@ def dashboard():
 @login_required
 def new_patient():
     form = PatientForm()
+    if form.validate_on_submit():
+        patient = Patient(first_name=form.first_name.data,
+                          last_name=form.last_name.data,
+                          gender=form.gender.data,
+                          race=form.race.data,
+                          birthday=form.birthday.data,
+                          doctor_id=current_user.id)
+        db.session.add(patient)
+        db.session.commit()
+        flash('New patient has been created!', 'success')
+        print(f'patient is {patient}')
+
+        return redirect(url_for('home'))
     return render_template('newpatient.html', title='Create New Patient', form=form, topic='New Patient')
+
+
+@app.route('/sessions')
+def sessions():
+    pass
+

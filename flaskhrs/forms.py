@@ -51,5 +51,5 @@ class PatientForm(FlaskForm):
     race = SelectField('Race',
                        choices=[('White', 'White'), ('Black', 'Black'), ('Asian', 'Asian'), ('AI', 'American Indian'),
                                 ('Hispanic', 'Hispanic')])
-    birthday = DateField('Date of Birth', validators=[DataRequired], format='%m/%d/%Y')
+    birthday = DateField('Date of Birth')
     submit = SubmitField('Create New Patient')

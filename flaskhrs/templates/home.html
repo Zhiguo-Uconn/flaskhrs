@@ -1,17 +1,17 @@
 {% extends "layout1.html" %}
 {% block content %}
-    {% for client in clients %}
+
         <div>
         <tr>
             <td>
-                {{ client.doc }}
+                {{ user.id }}
             </td>
             <td>
-                {{ client.gender }}
+                {{ user.role }}
             </td>
-            <td>{{ client.race }}</td>
-            <td>{{ client.bday }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.display_name }}</td>
 
         </tr></div>
-    {% endfor %}
+
 {% endblock %}
