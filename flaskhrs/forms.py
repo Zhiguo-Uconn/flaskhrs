@@ -1,15 +1,18 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, BooleanField, RadioField
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flaskhrs.models import User
+from flaskhrs.support import df
 
 
 class RegistrationForm(FlaskForm):
     username = StringField('Display Name', validators=[Length(min=2, max=40)], default='Strange')
     email = StringField('Email', validators=[DataRequired(), Email()])
     role = SelectField('I am a/an', choices=[('D', 'Doctor'), ('P', 'Individual')])
+    first_name = StringField('First Name', default='')
+    last_name = StringField('Last Name', default='')
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
@@ -53,3 +56,14 @@ class PatientForm(FlaskForm):
                                 ('Hispanic', 'Hispanic')])
     birthday = DateField('Date of Birth')
     submit = SubmitField('Create New Patient')
+
+
+class MedForm(FlaskForm):
+    smk = SelectField('Smoking', choices=df.get_choices('smk'), default=0)
+    marital = SelectField('Marital Status', choices=df.get_choices('MaritalStatus'), default=0)
+    education = SelectField('Education', choices=df.get_choices('Education'), default=0)
+    bmi = SelectField('BMI', choices=df.get_choices('BMI'), default=0)
+    alcohol = SelectField('Alcohol Consumption', choices=df.get_choices('Alcohol'), default=0)
+    physical = SelectField('Physical Activity', choices=df.get_choices('Physical Activity'), default=0)
+
+
