@@ -5,9 +5,9 @@ driven_factors = {
         (2, 'Ex-active'),
     ]
     ,
-    "boolChoice": [
-        ('1', 'Yes'),
-        ('0', 'No'),
+    "BoolChoice": [
+        (1, 'Yes'),
+        (0, 'No'),
     ],
     "MaritalStatus": [
         (0, 'Never Married'),

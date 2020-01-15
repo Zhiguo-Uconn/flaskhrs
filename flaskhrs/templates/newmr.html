@@ -1,67 +1,146 @@
 {% extends "dashboard.html" %}
 {% block content %}
-    <div class="content-section center">
-        <form>
+
+
+
+
+    <div class="content-section">
+        <form class="form-horizontal" method="POST" action="">
+            {{ form.hidden_tag() }}
             <div class="input-group mb-3">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     {{ form.smk.label(class="col-form-label") }}
                 </div>
                 {{ form.smk(class="custom-select col-sm-5") }}
             </div>
 
             <div class="input-group mb-3">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     {{ form.education.label(class="col-form-label") }}
                 </div>
                 {{ form.education(class="custom-select col-sm-5" ) }}
             </div>
 
             <div class="input-group mb-3">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     {{ form.marital.label(class="col-form-label") }}
                 </div>
                 {{ form.marital(class="custom-select col-sm-5" ) }}
             </div>
 
             <div class="input-group mb-3">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     {{ form.bmi.label(class="col-form-label") }}
                 </div>
                 {{ form.bmi(class="custom-select col-sm-5" ) }}
             </div>
 
             <div class="input-group mb-3">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     {{ form.alcohol.label(class="col-form-label") }}
                 </div>
                 {{ form.alcohol(class="custom-select col-sm-5" ) }}
             </div>
 
             <div class="input-group mb-3">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     {{ form.physical.label(class="col-form-label") }}
                 </div>
                 {{ form.physical(class="custom-select col-sm-5" ) }}
             </div>
 
-
-
-
-
-            <div class="form-group row">
-                <div class="col-sm-2">Checkbox</div>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                        <label class="form-check-label" for="gridCheck1">
-                            Example checkbox
-                        </label>
-                    </div>
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.g_diabetes.label(class="col-form-label") }}
                 </div>
+                {{ form.g_diabetes(class="custom-select col-sm-5" ) }}
             </div>
-            <div class="form-group row">
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.family_hist.label(class="col-form-label") }}
+                </div>
+                {{ form.family_hist(class="custom-select col-sm-5" ) }}
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.duration.label(class="col-form-label") }}
+                </div>
+                <span class="input-help">
+                {{ form.duration(class="form-control") }}
+                <small class="form-text text-muted">Number of years you have been diabetic</small>
+                </span>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.a1c.label(class="col-form-label") }}
+                </div>
+                <span class="input-help">
+                {{ form.a1c(class="form-control") }}
+                <small class="form-text text-muted">The A1C goal for many people with diabetes is below 7</small>
+                </span>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.glucose.label(class="col-form-label") }}
+                </div>
+                <span class="input-help">
+                {{ form.glucose(class="form-control" ) }}
+                <small class="form-text text-muted">Your most recent fast glucose test.</small>
+                </span>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.hdl.label(class="col-form-label") }}
+                </div>
+                <span class="input-help">
+                {{ form.hdl(class="form-control", placeholder="Ideal is 40 or higher for men and 50 or higher for women") }}
+                <small class="form-text text-muted">Ideal is 40 or higher for men and 50 or higher for women</small>
+                </span>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.ldl.label(class="col-form-label") }}
+                </div>
+                {{ form.ldl(class="form-control col-sm-5" ) }}
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.total.label(class="col-form-label") }}
+                </div>
+                {{ form.total(class="form-control col-sm-5" ) }}
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.tri.label(class="col-form-label") }}
+                </div>
+                {{ form.tri(class="form-control col-sm-5" ) }}
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.sy.label(class="col-form-label") }}
+                </div>
+                {{ form.sy(class="form-control col-sm-5" ) }}
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col-sm-3">
+                    {{ form.dia.label(class="col-form-label") }}
+                </div>
+                {{ form.dia(class="form-control col-sm-5" ) }}
+            </div>
+
+            <div class="form-group mb-3">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {{ form.submit(class="btn btn-outline-info") }}
                 </div>
             </div>
         </form>

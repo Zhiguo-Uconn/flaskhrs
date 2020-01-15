@@ -59,15 +59,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="{{ url_for('search_patient') }}">
                             <span data-feather="user"></span>
                             Look Up Patient <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ url_for('new_mr') }}">
                             <span data-feather="file-text"></span>
-                            New Record
+                            New Visiting Record
                         </a>
                     </li>
                     <li class="nav-item">
@@ -96,13 +96,26 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">
                     {% if topic %}
-                    {{ topic }}
-                {% else %}
+                        {{ topic }}
+                    {% else %}
 
-                {% endif %}</h1>
+                    {% endif %}</h1>
 
             </div>
 
+        <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
             {% block content %}{% endblock %}
 
         </main>

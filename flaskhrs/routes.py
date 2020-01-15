@@ -95,6 +95,7 @@ def new_patient():
 def new_mr():
     form = MedForm()
     if form.validate_on_submit():
+        print('mr form is submited')
         flash('New Record has been created!', 'success')
     return render_template('newmr.html', title='New Medical Record', form=form, topic='New Medical Record')
 
@@ -105,3 +106,28 @@ def list_sessions():
         print(f"key:{item}##############Value:{session[item]}")
     return 'session'
 
+
+@app.route("/search", methods=['GET', 'POST'])
+@login_required
+def search_patient():
+    print(f'query string is {request.query_string}')
+    doctor = current_user.doctor
+    query = Patient.query.filter_by(doctor_id=doctor.id)
+    if request.method == 'POST':
+        first_name = request.form['firstName']
+        last_name = request.form['lastName']
+        dob = request.form['DOB']
+
+        if first_name != '':
+            query = query.filter(Patient.first_name.ilike(first_name))
+        if last_name != '':
+            query = query.filter(Patient.last_name.ilike(last_name))
+        query = query.all()
+
+    return render_template('search.html', title='Search', topic='Search Patient', queryset=query)
+
+
+@app.route("/recent/<int:pid>")
+@login_required
+def patient_detail():
+    return  render_template('patient_detail.html', title='Most Recent Visit', topic='Most Recent Visit')
